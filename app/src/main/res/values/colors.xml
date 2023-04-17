@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="amarelo">#FFEB3B</color>
+    <color name="corBotoes">#61BDE7</color>
 </resources>
