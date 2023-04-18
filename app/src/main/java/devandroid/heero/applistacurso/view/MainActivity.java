@@ -1,10 +1,11 @@
 package devandroid.heero.applistacurso.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import devandroid.heero.applistacurso.R;
 import devandroid.heero.applistacurso.model.Pessoa;
@@ -28,10 +29,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pessoa = new Pessoa();
-        pessoa.setPrimeiroNome("Heider");
-        pessoa.setSobrenome("Bernardes");
-        pessoa.setCursoDesejado("Outro Curso");
-        pessoa.setTelefoneContato("9999999999");
 
         editPrimeiroNome = findViewById(R.id.editPrimeiroNome);
         editSobrenome = findViewById(R.id.editSobrenome);
@@ -46,5 +43,26 @@ public class MainActivity extends AppCompatActivity {
         editSobrenome.setText(pessoa.getSobrenome());
         editCurso.setText(pessoa.getCursoDesejado());
         editTelefone.setText(pessoa.getTelefoneContato());
+
+        btnLimpar.setOnClickListener(v -> {
+            editPrimeiroNome.setText("");
+            editSobrenome.setText("");
+            editCurso.setText("");
+            editTelefone.setText("");
+        });
+
+        btnFinalizar.setOnClickListener(v -> {
+            Toast.makeText(MainActivity.this, "Volte Sempre", Toast.LENGTH_LONG).show();
+            finish();
+        });
+
+        btnSalvar.setOnClickListener(v -> {
+            pessoa.setPrimeiroNome(editPrimeiroNome.getText().toString());
+            pessoa.setSobrenome(editSobrenome.getText().toString());
+            pessoa.setCursoDesejado(editCurso.getText().toString());
+            pessoa.setTelefoneContato(editTelefone.getText().toString());
+
+            Toast.makeText(MainActivity.this, "Salvo", Toast.LENGTH_LONG).show();
+        });
     }
 }
