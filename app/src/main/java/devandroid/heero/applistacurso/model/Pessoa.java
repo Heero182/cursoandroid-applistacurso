@@ -1,5 +1,7 @@
 package devandroid.heero.applistacurso.model;
 
+import androidx.annotation.NonNull;
+
 public class Pessoa {
 
     private String primeiroNome;
@@ -39,6 +41,7 @@ public class Pessoa {
         this.telefoneContato = telefoneContato;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Pessoa{" +
