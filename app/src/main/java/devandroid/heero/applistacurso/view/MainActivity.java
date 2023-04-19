@@ -1,13 +1,16 @@
 package devandroid.heero.applistacurso.view;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import devandroid.heero.applistacurso.R;
+import devandroid.heero.applistacurso.controller.CursoController;
 import devandroid.heero.applistacurso.controller.PessoaController;
 import devandroid.heero.applistacurso.model.Pessoa;
 
@@ -16,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     Pessoa pessoa;
 
     PessoaController pessoaController;
+
+    CursoController cursoController;
 
     EditText editPrimeiroNome;
     EditText editSobrenome;
@@ -26,22 +31,24 @@ public class MainActivity extends AppCompatActivity {
     Button btnSalvar;
     Button btnFinalizar;
 
+    Spinner spinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         pessoaController = new PessoaController(MainActivity.this);
+        cursoController = new CursoController();
 
         pessoa = pessoaController.buscar();
-
 
         editPrimeiroNome = findViewById(R.id.editPrimeiroNome);
         editSobrenome = findViewById(R.id.editSobrenome);
         editCurso = findViewById(R.id.editCurso);
         editTelefone = findViewById(R.id.editTelefone);
+
+        spinner = findViewById(R.id.spinner);
 
         btnLimpar = findViewById(R.id.btnLimpar);
         btnSalvar = findViewById(R.id.btnSalvar);
@@ -51,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         editSobrenome.setText(pessoa.getSobrenome());
         editCurso.setText(pessoa.getCursoDesejado());
         editTelefone.setText(pessoa.getTelefoneContato());
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cursoController.dadosSpinner());
+        adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+
+        spinner.setAdapter(adapter);
+
 
         btnLimpar.setOnClickListener(v -> {
             editPrimeiroNome.setText("");
